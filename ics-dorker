@@ -1,0 +1,216 @@
+#!/bin/bash
+cat << "EOF" 
+﻿8888888  .d8888b.   .d8888b.         8888888b.   .d88888b.  8888888b.  888    d8P  8888888888 8888888b.  
+  888   d88P  Y88b d88P  Y88b        888  "Y88b d88P" "Y88b 888   Y88b 888   d8P   888        888   Y88b 
+  888   888    888 Y88b.             888    888 888     888 888    888 888  d8P    888        888    888 
+  888   888         "Y888b.          888    888 888     888 888   d88P 888d88K     8888888    888   d88P 
+  888   888            "Y88b.        888    888 888     888 8888888P"  8888888b    888        8888888P"  
+  888   888    888       "888 888888 888    888 888     888 888 T88b   888  Y88b   888        888 T88b   
+  888   Y88b  d88P Y88b  d88P        888  .d88P Y88b. .d88P 888  T88b  888   Y88b  888        888  T88b  
+8888888  "Y8888P"   "Y8888P"         8888888P"   "Y88888P"  888   T88b 888    Y88b 8888888888 888   T88b 
+
+===========================:::::::::::::| Coded by 8L4CK_HUN736 |:::::::::::::::=======================
+=======================:::::::::::::::| Team Indian Cyber Shadows |:::::::::::::::::===================
+                                                                              
+EOF
+echo ""
+echo ""
+echo "Select an Option"
+echo ""
+echo "1. Install the requirements"
+echo "2. Start ics-dorker"
+read OPT
+if [ "$OPT" -eq 1 ]
+then
+apt update -y
+apt upgrade -y
+pkg update
+pkg upgrade 
+pkg install curl python2 busybox
+pip2 install --upgrade pip
+pip2 install urllib3
+pip2 install progressbar2
+clear
+echo "succesfully installed now select run the tool :)"
+./ics-dorker
+exit
+elif [ "$OPT" -eq 2 ]
+then
+clear
+cat << "EOF" 
+﻿8888888  .d8888b.   .d8888b.         8888888b.   .d88888b.  8888888b.  888    d8P  8888888888 8888888b.  
+  888   d88P  Y88b d88P  Y88b        888  "Y88b d88P" "Y88b 888   Y88b 888   d8P   888        888   Y88b 
+  888   888    888 Y88b.             888    888 888     888 888    888 888  d8P    888        888    888 
+  888   888         "Y888b.          888    888 888     888 888   d88P 888d88K     8888888    888   d88P 
+  888   888            "Y88b.        888    888 888     888 8888888P"  8888888b    888        8888888P"  
+  888   888    888       "888 888888 888    888 888     888 888 T88b   888  Y88b   888        888 T88b   
+  888   Y88b  d88P Y88b  d88P        888  .d88P Y88b. .d88P 888  T88b  888   Y88b  888        888  T88b  
+8888888  "Y8888P"   "Y8888P"         8888888P"   "Y88888P"  888   T88b 888    Y88b 8888888888 888   T88b 
+
+===========================:::::::::::::| Coded by 8L4CK_HUN736 |:::::::::::::::=======================
+=======================:::::::::::::::| Team Indian Cyber Shadows |:::::::::::::::::===================
+                                                                                                                                 
+EOF
+echo "Select an Option"
+echo "1. Generate Sites From Dork"
+echo "2. View Sample Dorks"
+echo "3. For Instructions"
+echo "4. Exit "
+read ch
+if [ $ch -eq 1 ];then
+clear
+cat << "EOF" 
+﻿8888888  .d8888b.   .d8888b.         8888888b.   .d88888b.  8888888b.  888    d8P  8888888888 8888888b.  
+  888   d88P  Y88b d88P  Y88b        888  "Y88b d88P" "Y88b 888   Y88b 888   d8P   888        888   Y88b 
+  888   888    888 Y88b.             888    888 888     888 888    888 888  d8P    888        888    888 
+  888   888         "Y888b.          888    888 888     888 888   d88P 888d88K     8888888    888   d88P 
+  888   888            "Y88b.        888    888 888     888 8888888P"  8888888b    888        8888888P"  
+  888   888    888       "888 888888 888    888 888     888 888 T88b   888  Y88b   888        888 T88b   
+  888   Y88b  d88P Y88b  d88P        888  .d88P Y88b. .d88P 888  T88b  888   Y88b  888        888  T88b  
+8888888  "Y8888P"   "Y8888P"         8888888P"   "Y88888P"  888   T88b 888    Y88b 8888888888 888   T88b 
+
+===========================:::::::::::::| Coded by 8L4CK_HUN736 |:::::::::::::::=======================
+=======================:::::::::::::::| Team Indian Cyber Shadows |:::::::::::::::::===================
+                                                                              
+EOF
+echo ""
+echo -e "\e[1;33m Enter A Google Dork:"
+read dork
+echo -e "Enter Number Of Pages:"
+read page
+echo >SDList.txt
+echo -e "\e[1;34m Please Wait... This May Take few Minutes..."
+url="https://www.google.com/search?q="+$dork
+curl -sA "Chrome" -L $url -o list1.txt
+python2 extract.py list1.txt >SDList.txt
+echo " Dorking Started !!!"
+half=$(( page/2 ))
+if [ $page -gt 1 ];then
+for (( i=1;i<$page;i++ ))
+do
+turl=$url"&start="$(( i*10 ))
+fn="list"$(( i+1 ))".txt"
+curl -sA "Chrome" -L $turl -o $fn
+python2 extract.py $fn >>SDList.txt
+if [ $i -eq $half ];then
+echo "50% Completed !!!"
+fi
+done
+fi
+echo "100% Completed !!!"
+echo "List Created For Dork: "$dork
+echo " "
+rm list*.txt
+echo "Do You Want To View it Now (Y/N):"
+read cho
+if [ "$cho" = "Y" ] || [ "$cho" = "y" ] ;then
+echo -e "\e[1;31mThis List Was Created By ics-dorker !!!"
+echo " "
+cat SDList.txt
+echo " "
+echo " "
+echo "Press Enter To Go To Main Menu"
+read a4
+else
+echo "Going Back to Main Menu..."
+sleep 1
+fi
+elif [ $ch -eq 2 ];then
+clear
+cd files
+while true
+do
+clear
+cat << "EOF" 
+﻿8888888  .d8888b.   .d8888b.         8888888b.   .d88888b.  8888888b.  888    d8P  8888888888 8888888b.  
+  888   d88P  Y88b d88P  Y88b        888  "Y88b d88P" "Y88b 888   Y88b 888   d8P   888        888   Y88b 
+  888   888    888 Y88b.             888    888 888     888 888    888 888  d8P    888        888    888 
+  888   888         "Y888b.          888    888 888     888 888   d88P 888d88K     8888888    888   d88P 
+  888   888            "Y88b.        888    888 888     888 8888888P"  8888888b    888        8888888P"  
+  888   888    888       "888 888888 888    888 888     888 888 T88b   888  Y88b   888        888 T88b   
+  888   Y88b  d88P Y88b  d88P        888  .d88P Y88b. .d88P 888  T88b  888   Y88b  888        888  T88b  
+8888888  "Y8888P"   "Y8888P"         8888888P"   "Y88888P"  888   T88b 888    Y88b 8888888888 888   T88b 
+
+===========================:::::::::::::| Coded by 8L4CK_HUN736 |:::::::::::::::=======================
+=======================:::::::::::::::| Team Indian Cyber Shadows |:::::::::::::::::===================
+                                                                              
+EOF
+echo "These Dorks Were Taken From Internet !! And Just Sample Better Use Your Own Dorks"
+echo " "
+echo "Press 1 For SQLi Dorks"
+echo "Press 2 For XSS Dorks"
+echo "Press 3 For LFI/RFI Dorks"
+echo "Press 4 To Exit "
+read dc
+if [ $dc -eq 1 ];then
+echo -e "\e[1;33mSome SQLi Dorks"
+echo " "
+cat sqli.speedx
+echo " "
+echo " "
+echo "Press Enter To Go Back"
+read a2
+elif [ $dc -eq 2 ];then
+echo -e "\e[1;33mSome XSS Dorks"
+echo " "
+cat xss.speedx
+echo " "
+echo " "
+echo "Press Enter To Go Back"
+read a2
+elif [ $dc -eq 3 ];then
+echo -e "\e[1;33mSome File Inclusion Dorks"
+echo " "
+cat lfi.speedx
+echo " "
+echo " "
+echo "Press Enter To Go Back"
+read a2
+elif [ $dc -eq 4 ];then
+break
+else
+echo "Invalid Input !!!"
+sleep 2
+fi
+done
+echo -e "\e[1;31m"
+cd ..
+elif [ $ch -eq 3 ];then
+clear
+cat << "EOF" 
+﻿8888888  .d8888b.   .d8888b.         8888888b.   .d88888b.  8888888b.  888    d8P  8888888888 8888888b.  
+  888   d88P  Y88b d88P  Y88b        888  "Y88b d88P" "Y88b 888   Y88b 888   d8P   888        888   Y88b 
+  888   888    888 Y88b.             888    888 888     888 888    888 888  d8P    888        888    888 
+  888   888         "Y888b.          888    888 888     888 888   d88P 888d88K     8888888    888   d88P 
+  888   888            "Y88b.        888    888 888     888 8888888P"  8888888b    888        8888888P"  
+  888   888    888       "888 888888 888    888 888     888 888 T88b   888  Y88b   888        888 T88b   
+  888   Y88b  d88P Y88b  d88P        888  .d88P Y88b. .d88P 888  T88b  888   Y88b  888        888  T88b  
+8888888  "Y8888P"   "Y8888P"         8888888P"   "Y88888P"  888   T88b 888    Y88b 8888888888 888   T88b 
+
+===========================:::::::::::::| Coded by 8L4CK_HUN736 |:::::::::::::::=======================
+=======================:::::::::::::::| Team Indian Cyber Shadows |:::::::::::::::::===================
+                                                                              
+EOF
+echo -e "\e[1;33m ics-dorker is a Tool which finds the list of website according to your given GOOGLE dork.\e[0m"
+echo " "
+echo -e "\e[1;32m Each page of generated dorks contains about 10 Websites. So if you type 1 page it gives 10 websites , 2 page gives 20 websites, etc."
+echo " "
+echo -e "\e[1;31m NOTE: It is Only For Educational Purposes. Neither I Say Nor I Promote To Hack Sites Without Owners Consent."
+echo " "
+echo " "
+echo " Press Enter To Continue..."
+read a5
+elif [ $ch -eq 4 ];then
+start=0
+else
+echo -e "\e[4;32m Invalid Input !!! \e[0m"
+echo "Press Enter To Go Home"
+read a3
+start=6
+clear
+fi
+echo "Thanks For Using ics-dorker !!"
+
+else 
+echo "sorry!! select a valid option"
+fi
