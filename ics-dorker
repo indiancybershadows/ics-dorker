@@ -99,6 +99,7 @@ done
 fi
 echo "100% Completed !!!"
 echo "List Created For Dork: "$dork
+echo "Sites Saved in File Name: site.txt"
 echo " "
 rm list*.txt
 echo "Do You Want To View it Now (Y/N):"
